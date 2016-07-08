@@ -13,7 +13,7 @@ An app demonstrate using of myTarget ads library.
     - Chat list view
     - Content wall view
 
-To use library in your app, call
+To use library in your app, call in Nuget Package Manager Console
 ```
 Install-Package Mycom.Target
 ```
