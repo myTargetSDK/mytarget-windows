@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
+  <Identity Name="c370ec70-da5f-405a-b27c-32dca138f98c" Publisher="CN=My.com" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="c370ec70-da5f-405a-b27c-32dca138f98c" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Properties>
+    <DisplayName>Mycom.Target Demo (WPA)</DisplayName>
+    <PublisherDisplayName>My.com</PublisherDisplayName>
+    <Logo>Assets\Mycom.Target.120.png</Logo>
+  </Properties>
+  <Prerequisites>
+    <OSMinVersion>6.3.1</OSMinVersion>
+    <OSMaxVersionTested>6.3.1</OSMaxVersionTested>
+  </Prerequisites>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Mycom.TargetDemoApp.App">
+      <m3:VisualElements DisplayName="Mycom.Target Demo (WPA)" Square150x150Logo="Assets\Mycom.Target.360.png" Square44x44Logo="Assets\Mycom.Target.106.png" Description="Mycom.Target demo application" ForegroundText="light" BackgroundColor="transparent">
+        <m3:DefaultTile Square71x71Logo="Assets\Mycom.Target.170.png" />
+      </m3:VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClientServer" />
+  </Capabilities>
+</Package>

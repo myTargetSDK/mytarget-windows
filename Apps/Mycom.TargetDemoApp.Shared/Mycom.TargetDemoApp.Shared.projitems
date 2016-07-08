@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>608acecf-47f7-4ad6-b8fd-f87a65681bf1</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Mycom.TargetDemoApp</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+    <Page Include="$(MSBuildThisFileDirectory)Views\AddCustomSlotView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\InterstitialAdPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\NativeAdPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\StandardAdPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\StartPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\BooleanToObjectConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\InvertedBooleanToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\VisualTreeExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\CustomPropertyFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Resources\Brushes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\DialogService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AddCustomSlotViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AdvertisementType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BaseItemViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CustomItemViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FeedViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ICloseNotify.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\InterstitialAdPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\InterstitialAdViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\InterstitialCustomItemViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\IRemoveNotify.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoremIpsumItemViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NativeAdPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\DefaultItemViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NativeAdWrapperViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\StandardAdPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\StartPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\AddCustomSlotView.xaml.cs">
+      <DependentUpon>AddCustomSlotView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\CustomFlyout.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\CustomItemView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\DefaultItemView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\InterstitialAdPage.xaml.cs">
+      <DependentUpon>InterstitialAdPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\InterstitialAdView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\InterstitialItemView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\ItemViewConstatns.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\NativeAdPage.xaml.cs">
+      <DependentUpon>NativeAdPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\SimpleCustomView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\StandardAdPage.xaml.cs">
+      <DependentUpon>StandardAdPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\StartPage.xaml.cs">
+      <DependentUpon>StartPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\Error.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Resources\InterstitialAd.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Resources\InterstitialAd_video.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Resources\InterstitialImageAd.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Resources\InterstitialPromoAd.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Resources\InterstitialPromoVideoAd.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Resources\NativeAd.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Resources\Plus.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Resources\StandardAd.png" />
+  </ItemGroup>
+</Project>
