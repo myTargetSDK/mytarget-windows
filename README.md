@@ -13,7 +13,7 @@ An app demonstrate using of myTarget ads library.
     - Chat list view
     - Content wall view
 
-![#](https://img.shields.io/nuget/v/Mycom.Target.svg)
+[![#](https://img.shields.io/nuget/v/Mycom.Target.svg)](https://www.nuget.org/packages/Mycom.Target/)
 
 To use library in your app, call in Nuget Package Manager Console
 ```
