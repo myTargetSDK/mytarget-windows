@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{FE9B5FC6-6A15-4A1C-9C16-E2B818297087}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "myTargetDemo", "myTargetDemo", "{FE9B5FC6-6A15-4A1C-9C16-E2B818297087}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mycom.TargetDemoApp.Shared", "Apps\Mycom.TargetDemoApp.Shared\Mycom.TargetDemoApp.Shared.shproj", "{608ACECF-47F7-4AD6-B8FD-F87A65681BF1}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mycom.TargetDemoApp.Shared", "myTargetDemo\Mycom.TargetDemoApp.Shared\Mycom.TargetDemoApp.Shared.shproj", "{608ACECF-47F7-4AD6-B8FD-F87A65681BF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mycom.TargetDemoApp.UAP", "Apps\Mycom.TargetDemoApp.UAP\Mycom.TargetDemoApp.UAP.csproj", "{EB0B5111-A4ED-483D-9BE8-7BE1855BC25A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mycom.TargetDemoApp.UAP", "myTargetDemo\Mycom.TargetDemoApp.UAP\Mycom.TargetDemoApp.UAP.csproj", "{EB0B5111-A4ED-483D-9BE8-7BE1855BC25A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mycom.TargetDemoApp.WPA", "Apps\Mycom.TargetDemoApp.WPA\Mycom.TargetDemoApp.WPA.csproj", "{3B74393D-BF25-4675-8CA0-0BD4477B0AA2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mycom.TargetDemoApp.WPA", "myTargetDemo\Mycom.TargetDemoApp.WPA\Mycom.TargetDemoApp.WPA.csproj", "{3B74393D-BF25-4675-8CA0-0BD4477B0AA2}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Apps\Mycom.TargetDemoApp.Shared\Mycom.TargetDemoApp.Shared.projitems*{3b74393d-bf25-4675-8ca0-0bd4477b0aa2}*SharedItemsImports = 4
-		Apps\Mycom.TargetDemoApp.Shared\Mycom.TargetDemoApp.Shared.projitems*{608acecf-47f7-4ad6-b8fd-f87a65681bf1}*SharedItemsImports = 13
-		Apps\Mycom.TargetDemoApp.Shared\Mycom.TargetDemoApp.Shared.projitems*{eb0b5111-a4ed-483d-9be8-7be1855bc25a}*SharedItemsImports = 4
+		myTargetDemo\Mycom.TargetDemoApp.Shared\Mycom.TargetDemoApp.Shared.projitems*{3b74393d-bf25-4675-8ca0-0bd4477b0aa2}*SharedItemsImports = 4
+		myTargetDemo\Mycom.TargetDemoApp.Shared\Mycom.TargetDemoApp.Shared.projitems*{608acecf-47f7-4ad6-b8fd-f87a65681bf1}*SharedItemsImports = 13
+		myTargetDemo\Mycom.TargetDemoApp.Shared\Mycom.TargetDemoApp.Shared.projitems*{eb0b5111-a4ed-483d-9be8-7be1855bc25a}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
