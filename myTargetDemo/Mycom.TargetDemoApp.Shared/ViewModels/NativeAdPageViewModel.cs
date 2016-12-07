@@ -10,7 +10,9 @@ namespace Mycom.TargetDemoApp.ViewModels
 
     internal sealed class NativeAdPageViewModel : ICustomPropertyProvider, INotifyPropertyChanged
     {
+        private const Int32 DefaultSlotId = 30296;
         private const String Title = "Native Ads";
+        private const Int32 VideoSlotId = 30157;
 
         private static readonly IReadOnlyDictionary<String, ICustomProperty> CustomProperties =
             CustomPropertyFactory.CreateDictionary(CustomPropertyFactory.Create(nameof(Title), o => Title),
@@ -57,14 +59,19 @@ namespace Mycom.TargetDemoApp.ViewModels
             }
         }
 
-        public NativeAdPageViewModel(Int32 slotId = 30296)
+        public NativeAdPageViewModel(Int32? slotId = null)
         {
+            var defaultNativeAdSlotId = slotId.GetValueOrDefault(DefaultSlotId);
+            var videoNativeAdSlotId = slotId.GetValueOrDefault(VideoSlotId);
+
             DataList = new List<FeedViewModel>
                        {
-                           new FeedViewModel(slotId, "CONTENT STREAM", NativeAdViewType.ContentStream),
-                           new FeedViewModel(slotId, "NEWS FEED", NativeAdViewType.NewsFeed),
-                           new FeedViewModel(slotId, "CHAT LIST", NativeAdViewType.ChatList),
-                           new FeedViewModel(slotId, "CONTENT WALL", NativeAdViewType.ContentWall)
+                           new FeedViewModel(defaultNativeAdSlotId, "CONTENT STREAM", NativeAdViewType.ContentStream),
+                           new FeedViewModel(defaultNativeAdSlotId, "NEWS FEED", NativeAdViewType.NewsFeed),
+                           new FeedViewModel(defaultNativeAdSlotId, "CHAT LIST", NativeAdViewType.ChatList),
+                           new FeedViewModel(defaultNativeAdSlotId, "CONTENT WALL", NativeAdViewType.ContentWall),
+                           new FeedViewModel(videoNativeAdSlotId, "CONTENT STREAM VIDEO", NativeAdViewType.ContentStream),
+                           new FeedViewModel(videoNativeAdSlotId, "CONTENT WALL VIDEO", NativeAdViewType.ContentWall)
                        };
 
             SelectedItem = DataList[0];

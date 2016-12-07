@@ -93,8 +93,8 @@
     <Content Include="Assets\Mycom.Target.360.scale-240.png" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Mycom.Target, Version=1.5.2.0, Culture=neutral, PublicKeyToken=dd9814a81da1af1e, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Mycom.Target.1.5.2\lib\wpa81\Mycom.Target.dll</HintPath>
+    <Reference Include="Mycom.Target, Version=1.5.3.0, Culture=neutral, PublicKeyToken=dd9814a81da1af1e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mycom.Target.1.5.3\lib\wpa81\Mycom.Target.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

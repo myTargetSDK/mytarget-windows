@@ -1,7 +1,7 @@
 ﻿{
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
-    "Mycom.Target": "1.5.2"
+    "Mycom.Target": "1.5.3"
   },
   "frameworks": {
     "uap10.0": {}

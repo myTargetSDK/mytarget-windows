@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Data;
-using Mycom.TargetDemoApp.Helpers;
 using Mycom.Target.NativeAds;
+using Mycom.TargetDemoApp.Helpers;
 
 namespace Mycom.TargetDemoApp.ViewModels
 {
@@ -38,11 +38,13 @@ namespace Mycom.TargetDemoApp.ViewModels
 
         private static readonly LoremIpsumItemViewModel LoremIpsumItemViewModel = new LoremIpsumItemViewModel();
 
+        private readonly Int32 _slotId;
         private readonly ObservableCollection<Object> DataList;
         private readonly String Title;
 
         public FeedViewModel(Int32 slotId, String title, NativeAdViewType viewType)
         {
+            _slotId = slotId;
             Title = title;
 
             DataList = new ObservableCollection<Object>();
@@ -56,7 +58,7 @@ namespace Mycom.TargetDemoApp.ViewModels
             for (var i = 0; i <= 2; i++)
             {
                 var iTemp = i * 12 + 8;
-                var nativeAd = new NativeAd(slotId) { AutoLoadImages = true };
+                var nativeAd = new NativeAd(_slotId) { AutoLoadImages = true };
                 nativeAd.LoadAsync()
                         .ContinueWith(task =>
                                       {
@@ -81,7 +83,7 @@ namespace Mycom.TargetDemoApp.ViewModels
                     continue;
                 }
 
-                var nativeAd = new NativeAd(30296) { AutoLoadImages = true };
+                var nativeAd = new NativeAd(_slotId) { AutoLoadImages = true };
                 nativeAd.LoadAsync();
                 DataList[i] = new NativeAdWrapperViewModel(nativeAd, adWrapperViewModel.DesiredViewType);
             }
