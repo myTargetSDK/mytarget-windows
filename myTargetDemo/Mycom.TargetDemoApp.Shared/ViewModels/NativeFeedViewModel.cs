@@ -8,7 +8,7 @@ using Mycom.TargetDemoApp.Helpers;
 
 namespace Mycom.TargetDemoApp.ViewModels
 {
-    using CustomPropertyFactory = CustomPropertyFactory<FeedViewModel>;
+    using CustomPropertyFactory = CustomPropertyFactory<NativeFeedViewModel>;
 
     internal enum NativeAdViewType
     {
@@ -18,42 +18,30 @@ namespace Mycom.TargetDemoApp.ViewModels
         ChatList
     }
 
-    internal sealed class FeedViewModel : ICustomPropertyProvider
+    internal sealed class NativeFeedViewModel : ICustomPropertyProvider
     {
         private static readonly IReadOnlyDictionary<String, ICustomProperty> CustomProperties =
             CustomPropertyFactory.CreateDictionary(CustomPropertyFactory.Create(nameof(Title), o => o.Title),
-                                                   CustomPropertyFactory.Create(nameof(DataList),
-                                                                                o => o.DataList,
-                                                                                (o, i) =>
-                                                                                {
-                                                                                    try
-                                                                                    {
-                                                                                        return o.DataList[Convert.ToInt32(i)];
-                                                                                    }
-                                                                                    catch (Exception)
-                                                                                    {
-                                                                                        return null;
-                                                                                    }
-                                                                                }));
+                                                   CustomPropertyFactory.Create(nameof(Items), o => o.Items));
 
         private static readonly LoremIpsumItemViewModel LoremIpsumItemViewModel = new LoremIpsumItemViewModel();
 
         private readonly Int32 _slotId;
-        private readonly ObservableCollection<Object> DataList;
+        private readonly ObservableCollection<Object> Items;
         private readonly String Title;
 
-        public FeedViewModel(Int32 slotId, String title, NativeAdViewType viewType)
+        public NativeFeedViewModel(Int32 slotId, String title, NativeAdViewType viewType)
         {
             _slotId = slotId;
             Title = title;
 
-            DataList = new ObservableCollection<Object>();
+            Items = new ObservableCollection<Object>();
             for (var i = 0; i < 17; i++)
             {
-                DataList.Add(LoremIpsumItemViewModel);
-                DataList.Add(null);
+                Items.Add(LoremIpsumItemViewModel);
+                Items.Add(null);
             }
-            DataList.Add(new LoremIpsumItemViewModel());
+            Items.Add(new LoremIpsumItemViewModel());
 
             for (var i = 0; i <= 2; i++)
             {
@@ -65,8 +53,8 @@ namespace Mycom.TargetDemoApp.ViewModels
                                           var result = task.Result;
                                           if (result.IsLoaded)
                                           {
-                                              DataList.Insert(iTemp, null);
-                                              DataList.Insert(iTemp, new NativeAdWrapperViewModel(nativeAd, viewType));
+                                              Items.Insert(iTemp, null);
+                                              Items.Insert(iTemp, new NativeAdWrapperViewModel(nativeAd, viewType));
                                           }
                                       },
                                       TaskScheduler.FromCurrentSynchronizationContext());
@@ -75,9 +63,9 @@ namespace Mycom.TargetDemoApp.ViewModels
 
         public void Update()
         {
-            for (var i = 0; i < DataList.Count; i++)
+            for (var i = 0; i < Items.Count; i++)
             {
-                var adWrapperViewModel = DataList[i] as NativeAdWrapperViewModel;
+                var adWrapperViewModel = Items[i] as NativeAdWrapperViewModel;
                 if (adWrapperViewModel == null)
                 {
                     continue;
@@ -85,7 +73,7 @@ namespace Mycom.TargetDemoApp.ViewModels
 
                 var nativeAd = new NativeAd(_slotId) { AutoLoadImages = true };
                 nativeAd.LoadAsync();
-                DataList[i] = new NativeAdWrapperViewModel(nativeAd, adWrapperViewModel.DesiredViewType);
+                Items[i] = new NativeAdWrapperViewModel(nativeAd, adWrapperViewModel.DesiredViewType);
             }
         }
 

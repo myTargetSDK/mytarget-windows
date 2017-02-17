@@ -5,103 +5,251 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:views="using:Mycom.TargetDemoApp.Views"
       mc:Ignorable="d">
+    <Page.Resources>
+        <views:StandardAdTemplateSelector x:Key="ItemTemplateSelector">
+            <views:StandardAdTemplateSelector.StandardAdTemplate>
+                <DataTemplate>
+                    <views:StandardAdItemView />
+                </DataTemplate>
+            </views:StandardAdTemplateSelector.StandardAdTemplate>
+            <views:StandardAdTemplateSelector.LoremIpsumTemplate>
+                <DataTemplate>
+                    <Grid Margin="12,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="12" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="12" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="12" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="1"
+                                   FontSize="18.0"
+                                   Foreground="Black"
+                                   LineHeight="18.0"
+                                   LineStackingStrategy="BlockLineHeight"
+                                   Text="{Binding Title,
+                                                  Mode=OneTime}" />
+                        <TextBlock Grid.Row="3"
+                                   FontSize="14.0"
+                                   Foreground="Black"
+                                   LineHeight="18.0"
+                                   LineStackingStrategy="BlockLineHeight"
+                                   Text="{Binding Content,
+                                                  Mode=OneTime}"
+                                   TextWrapping="WrapWholeWords" />
+                    </Grid>
+                </DataTemplate>
+            </views:StandardAdTemplateSelector.LoremIpsumTemplate>
+            <views:StandardAdTemplateSelector.NullTemplate>
+                <DataTemplate>
+                    <Rectangle Height="1" Fill="LightGray" />
+                </DataTemplate>
+            </views:StandardAdTemplateSelector.NullTemplate>
+        </views:StandardAdTemplateSelector>
+    </Page.Resources>
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <RowDefinition Height="90" />
             <RowDefinition />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ItemsControl Grid.Row="1" ItemsSource="{Binding DataList, Mode=OneTime}">
-            <ItemsControl.Template>
-                <ControlTemplate>
-                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
-                                  HorizontalScrollMode="Disabled"
-                                  VerticalScrollBarVisibility="Auto"
-                                  VerticalScrollMode="Auto">
-                        <ItemsPresenter />
-                    </ScrollViewer>
-                </ControlTemplate>
-            </ItemsControl.Template>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <ItemsStackPanel />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplateSelector>
-                <views:StandardAdTemplateSelector>
-                    <views:StandardAdTemplateSelector.ObjectTemplate>
-                        <DataTemplate>
-                            <Grid Margin="12,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="12" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="12" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="12" />
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="1"
-                                           FontSize="18.0"
-                                           Foreground="Black"
-                                           LineHeight="18.0"
-                                           LineStackingStrategy="BlockLineHeight"
-                                           Text="{Binding Title,
-                                                          Mode=OneTime}" />
-                                <TextBlock Grid.Row="3"
-                                           FontSize="14.0"
-                                           Foreground="Black"
-                                           LineHeight="18.0"
-                                           LineStackingStrategy="BlockLineHeight"
-                                           Text="{Binding Content,
-                                                          Mode=OneTime}"
-                                           TextWrapping="WrapWholeWords" />
-                            </Grid>
-                        </DataTemplate>
-                    </views:StandardAdTemplateSelector.ObjectTemplate>
-                    <views:StandardAdTemplateSelector.NullTemplate>
-                        <DataTemplate>
-                            <Rectangle Height="1" Fill="LightGray" />
-                        </DataTemplate>
-                    </views:StandardAdTemplateSelector.NullTemplate>
-                </views:StandardAdTemplateSelector>
-            </ItemsControl.ItemTemplateSelector>
-        </ItemsControl>
-
+        <FlipView x:Name="FlipView"
+                  Grid.Row="1"
+                  ItemsSource="{Binding Items,
+                                        Mode=OneTime}"
+                  SelectedItem="{Binding SelectedItem,
+                                         Mode=TwoWay}">
+            <FlipView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <ItemsControl Grid.Row="0"
+                                      ItemTemplateSelector="{StaticResource ItemTemplateSelector}"
+                                      ItemsSource="{Binding Items,
+                                                            Mode=OneTime}">
+                            <ItemsControl.Template>
+                                <ControlTemplate>
+                                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                                  HorizontalScrollMode="Disabled"
+                                                  VerticalScrollBarVisibility="Auto"
+                                                  VerticalScrollMode="Auto">
+                                        <ItemsPresenter />
+                                    </ScrollViewer>
+                                </ControlTemplate>
+                            </ItemsControl.Template>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsStackPanel />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                        <views:StandardAdItemView Grid.Row="1" DataContext="{Binding StandardAdItemViewModel, Mode=OneTime}" />
+                    </Grid>
+                </DataTemplate>
+            </FlipView.ItemTemplate>
+        </FlipView>
         <Grid Grid.Row="0" Background="Red">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="12" />
-                <ColumnDefinition />
-                <ColumnDefinition Width="12" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="12" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="1"
-                       VerticalAlignment="Center"
-                       FontSize="18.0"
-                       FontWeight="SemiBold"
-                       Foreground="White"
-                       IsHitTestVisible="False"
-                       LineHeight="18.0"
-                       LineStackingStrategy="BlockLineHeight"
-                       Text="{Binding Title}"
-                       TextLineBounds="Tight" />
-            <Border Grid.Column="3"
-                    Margin="-12"
-                    Background="Transparent"
-                    Padding="12"
-                    Tapped="OnUpdateTapped">
-                <TextBlock VerticalAlignment="Center"
-                           FontFamily="Segoe UI Symbol"
-                           FontSize="14.0"
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+
+            <!--  PAGE HEADER  -->
+            <Grid Grid.Row="0" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="12" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="12" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="12" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="1"
+                           VerticalAlignment="Center"
+                           FontSize="18.0"
                            FontWeight="SemiBold"
                            Foreground="White"
                            IsHitTestVisible="False"
-                           LineHeight="14.0"
+                           LineHeight="18.0"
                            LineStackingStrategy="BlockLineHeight"
-                           Text="&#xE117;"
+                           Text="{Binding Title,
+                                          Mode=OneTime}"
                            TextLineBounds="Tight" />
-            </Border>
-            <Rectangle Grid.Column="0"
-                       Grid.ColumnSpan="5"
+                <Border Grid.Column="3"
+                        Margin="-12"
+                        Background="Transparent"
+                        Padding="12"
+                        Tapped="OnUpdateTapped">
+                    <TextBlock VerticalAlignment="Center"
+                               FontFamily="Segoe UI Symbol"
+                               FontSize="14.0"
+                               FontWeight="SemiBold"
+                               Foreground="White"
+                               IsHitTestVisible="False"
+                               LineHeight="14.0"
+                               LineStackingStrategy="BlockLineHeight"
+                               Text="&#xE117;"
+                               TextLineBounds="Tight" />
+                </Border>
+            </Grid>
+
+            <!--  SELECTED ITEM HEADER  -->
+            <ListBox x:Name="ListBox"
+                     Grid.Row="1"
+                     Background="Red"
+                     ItemsSource="{Binding Items,
+                                           Mode=OneTime}"
+                     Padding="0"
+                     ScrollViewer.BringIntoViewOnFocusChange="False"
+                     ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                     ScrollViewer.HorizontalScrollMode="Disabled"
+                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                     ScrollViewer.VerticalScrollMode="Disabled"
+                     SelectedItem="{Binding SelectedItem,
+                                            Mode=TwoWay}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsStackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="HorizontalContentAlignment" Value="Left" />
+                        <Setter Property="Padding" Value="12,0" />
+                        <Setter Property="TabNavigation" Value="Local" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal" />
+                                                <VisualState x:Name="PointerOver" />
+                                                <VisualState x:Name="Disabled" />
+                                                <VisualState x:Name="Pressed">
+                                                    <Storyboard>
+                                                        <PointerDownThemeAnimation Storyboard.TargetName="InnerGrid" />
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualStateGroup.Transitions>
+                                                    <VisualTransition From="Pressed" To="Normal">
+                                                        <Storyboard>
+                                                            <PointerUpThemeAnimation Storyboard.TargetName="InnerGrid" />
+                                                        </Storyboard>
+                                                    </VisualTransition>
+                                                </VisualStateGroup.Transitions>
+                                            </VisualStateGroup>
+                                            <VisualStateGroup x:Name="SelectionStates">
+                                                <VisualState x:Name="Unselected">
+                                                    <Storyboard>
+                                                        <FadeOutThemeAnimation Storyboard.TargetName="SelectionLine" />
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="Selected">
+                                                    <Storyboard>
+                                                        <FadeInThemeAnimation Storyboard.TargetName="SelectionLine" />
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="SelectedUnfocused">
+                                                    <Storyboard>
+                                                        <FadeInThemeAnimation Storyboard.TargetName="SelectionLine" />
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="SelectedDisabled">
+                                                    <Storyboard>
+                                                        <FadeInThemeAnimation Storyboard.TargetName="SelectionLine" />
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="SelectedPointerOver">
+                                                    <Storyboard>
+                                                        <FadeInThemeAnimation Storyboard.TargetName="SelectionLine" />
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="SelectedPressed">
+                                                    <Storyboard>
+                                                        <FadeInThemeAnimation Storyboard.TargetName="SelectionLine" />
+                                                    </Storyboard>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <Grid x:Name="InnerGrid" Background="Transparent">
+                                            <Rectangle x:Name="SelectionLine"
+                                                       Height="3"
+                                                       VerticalAlignment="Bottom"
+                                                       Fill="White" />
+                                            <ContentPresenter Margin="{TemplateBinding Padding}"
+                                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                              Content="{TemplateBinding Content}"
+                                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                              ContentTransitions="{TemplateBinding ContentTransitions}" />
+                                        </Grid>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock VerticalAlignment="Center"
+                                   FontSize="12.0"
+                                   FontWeight="Bold"
+                                   Foreground="White"
+                                   LineHeight="12.0"
+                                   LineStackingStrategy="BlockLineHeight"
+                                   Text="{Binding Title,
+                                                  Mode=OneTime}"
+                                   TextLineBounds="Tight" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Rectangle Grid.Row="1"
                        Height="5"
                        Margin="0,0,0,-5"
                        VerticalAlignment="Bottom">
@@ -113,6 +261,5 @@
                 </Rectangle.Fill>
             </Rectangle>
         </Grid>
-        <ContentPresenter x:Name="AdPlaceholder" Grid.Row="2" />
     </Grid>
 </Page>

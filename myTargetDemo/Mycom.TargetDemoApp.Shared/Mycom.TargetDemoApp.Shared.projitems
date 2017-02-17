@@ -49,7 +49,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AdvertisementType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BaseItemViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CustomItemViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FeedViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NativeFeedViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ICloseNotify.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\InterstitialAdPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\InterstitialAdViewModel.cs" />
@@ -59,7 +59,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NativeAdPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\DefaultItemViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NativeAdWrapperViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\StandardAdItemViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\StandardAdPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\StandardFeedViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\StartPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\AddCustomSlotView.xaml.cs">
       <DependentUpon>AddCustomSlotView.xaml</DependentUpon>
@@ -80,6 +82,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\StandardAdPage.xaml.cs">
       <DependentUpon>StandardAdPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\StandardAdItemView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>

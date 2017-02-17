@@ -8,7 +8,7 @@
       xmlns:views="using:Mycom.TargetDemoApp.Views"
       mc:Ignorable="d">
     <Page.Resources>
-        <views:NativeAdDataTemplateSelector x:Key="ContentStreamTemplateSelector">
+        <views:NativeAdDataTemplateSelector x:Key="ItemTemplateSelector">
             <views:NativeAdDataTemplateSelector.ObjectTemplate>
                 <DataTemplate>
                     <Grid Margin="12,0">
@@ -95,13 +95,13 @@
         </Grid.RowDefinitions>
         <FlipView x:Name="FlipView"
                   Grid.Row="1"
-                  ItemsSource="{Binding DataList,
+                  ItemsSource="{Binding Items,
                                         Mode=OneTime}"
                   SelectedItem="{Binding SelectedItem,
                                          Mode=TwoWay}">
             <FlipView.ItemTemplate>
                 <DataTemplate>
-                    <ItemsControl ItemTemplateSelector="{StaticResource ContentStreamTemplateSelector}" ItemsSource="{Binding DataList, Mode=OneTime}">
+                    <ItemsControl ItemTemplateSelector="{StaticResource ItemTemplateSelector}" ItemsSource="{Binding Items, Mode=OneTime}">
                         <ItemsControl.Template>
                             <ControlTemplate>
                                 <ScrollViewer HorizontalScrollBarVisibility="Disabled"
@@ -144,7 +144,8 @@
                            IsHitTestVisible="False"
                            LineHeight="18.0"
                            LineStackingStrategy="BlockLineHeight"
-                           Text="{Binding Title}"
+                           Text="{Binding Title,
+                                          Mode=OneTime}"
                            TextLineBounds="Tight" />
                 <Border Grid.Column="3"
                         Margin="-12"
@@ -168,7 +169,7 @@
             <ListBox x:Name="ListBox"
                      Grid.Row="1"
                      Background="Red"
-                     ItemsSource="{Binding DataList,
+                     ItemsSource="{Binding Items,
                                            Mode=OneTime}"
                      Padding="0"
                      ScrollViewer.BringIntoViewOnFocusChange="False"
@@ -186,9 +187,9 @@
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="Background" Value="Transparent" />
-                        <Setter Property="TabNavigation" Value="Local" />
-                        <Setter Property="Padding" Value="12,0" />
                         <Setter Property="HorizontalContentAlignment" Value="Left" />
+                        <Setter Property="Padding" Value="12,0" />
+                        <Setter Property="TabNavigation" Value="Local" />
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBoxItem">

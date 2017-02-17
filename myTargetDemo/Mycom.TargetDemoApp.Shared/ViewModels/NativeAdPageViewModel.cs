@@ -16,35 +16,14 @@ namespace Mycom.TargetDemoApp.ViewModels
 
         private static readonly IReadOnlyDictionary<String, ICustomProperty> CustomProperties =
             CustomPropertyFactory.CreateDictionary(CustomPropertyFactory.Create(nameof(Title), o => Title),
-                                                   CustomPropertyFactory.Create(nameof(DataList),
-                                                                                o => o.DataList,
-                                                                                (o, i) =>
-                                                                                {
-                                                                                    try
-                                                                                    {
-                                                                                        return o.DataList[Convert.ToInt32(i)];
-                                                                                    }
-                                                                                    catch (Exception)
-                                                                                    {
-                                                                                        return null;
-                                                                                    }
-                                                                                }),
-                                                   CustomPropertyFactory.Create(nameof(SelectedItem),
-                                                                                o => o.SelectedItem,
-                                                                                (o, value) =>
-                                                                                {
-                                                                                    var viewModel = o;
-                                                                                    if (viewModel != null)
-                                                                                    {
-                                                                                        viewModel.SelectedItem = value;
-                                                                                    }
-                                                                                }));
+                                                   CustomPropertyFactory.Create(nameof(Items), o => o.Items),
+                                                   CustomPropertyFactory.Create(nameof(SelectedItem), o => o.SelectedItem, (o, value) => o.SelectedItem = value));
 
-        private readonly IReadOnlyList<FeedViewModel> DataList;
+        private readonly IReadOnlyList<NativeFeedViewModel> Items;
 
-        private FeedViewModel _selectedItem;
+        private NativeFeedViewModel _selectedItem;
 
-        private FeedViewModel SelectedItem
+        private NativeFeedViewModel SelectedItem
         {
             get { return _selectedItem; }
             set
@@ -64,17 +43,17 @@ namespace Mycom.TargetDemoApp.ViewModels
             var defaultNativeAdSlotId = slotId.GetValueOrDefault(DefaultSlotId);
             var videoNativeAdSlotId = slotId.GetValueOrDefault(VideoSlotId);
 
-            DataList = new List<FeedViewModel>
-                       {
-                           new FeedViewModel(defaultNativeAdSlotId, "CONTENT STREAM", NativeAdViewType.ContentStream),
-                           new FeedViewModel(defaultNativeAdSlotId, "NEWS FEED", NativeAdViewType.NewsFeed),
-                           new FeedViewModel(defaultNativeAdSlotId, "CHAT LIST", NativeAdViewType.ChatList),
-                           new FeedViewModel(defaultNativeAdSlotId, "CONTENT WALL", NativeAdViewType.ContentWall),
-                           new FeedViewModel(videoNativeAdSlotId, "CONTENT STREAM VIDEO", NativeAdViewType.ContentStream),
-                           new FeedViewModel(videoNativeAdSlotId, "CONTENT WALL VIDEO", NativeAdViewType.ContentWall)
-                       };
+            Items = new List<NativeFeedViewModel>
+                    {
+                        new NativeFeedViewModel(defaultNativeAdSlotId, "CONTENT STREAM", NativeAdViewType.ContentStream),
+                        new NativeFeedViewModel(defaultNativeAdSlotId, "NEWS FEED", NativeAdViewType.NewsFeed),
+                        new NativeFeedViewModel(defaultNativeAdSlotId, "CHAT LIST", NativeAdViewType.ChatList),
+                        new NativeFeedViewModel(defaultNativeAdSlotId, "CONTENT WALL", NativeAdViewType.ContentWall),
+                        new NativeFeedViewModel(videoNativeAdSlotId, "CONTENT STREAM VIDEO", NativeAdViewType.ContentStream),
+                        new NativeFeedViewModel(videoNativeAdSlotId, "CONTENT WALL VIDEO", NativeAdViewType.ContentWall)
+                    };
 
-            SelectedItem = DataList[0];
+            SelectedItem = Items[0];
         }
 
         public void Update()

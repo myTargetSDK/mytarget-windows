@@ -1,93 +1,89 @@
 ﻿using System;
+using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
-using Mycom.Target.Ads;
+using Mycom.TargetDemoApp.Extensions;
 using Mycom.TargetDemoApp.ViewModels;
 
 namespace Mycom.TargetDemoApp.Views
 {
     internal sealed partial class StandardAdPage
     {
-        private static readonly DependencyProperty SlotIdProperty = DependencyProperty.Register("SlotId",
-                                                                                                typeof (Object),
-                                                                                                typeof (StandardAdPage),
-                                                                                                new PropertyMetadata(default(Object), OnSlotIdChanged));
-
-        private static readonly Binding SlotIdBinding = new Binding
-                                                        {
-                                                            Path = new PropertyPath(nameof(StandardAdPageViewModel.SlotId)),
-                                                            Mode = BindingMode.OneTime
-                                                        };
-
-        private static void OnSlotIdChanged(DependencyObject dependencyObject,
-                                            DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
-        {
-            ((StandardAdPage) dependencyObject).OnSlotIdChangedImpl(dependencyPropertyChangedEventArgs.NewValue as Int32?);
-        }
-
         public StandardAdPage()
         {
             InitializeComponent();
-
-            BindingOperations.SetBinding(this,
-                                         SlotIdProperty,
-                                         SlotIdBinding);
+            Loaded += OnLoaded;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            if (DataContext == null)
+            if (DataContext != null)
             {
-                DataContext = e.Parameter == null ? new StandardAdPageViewModel() : new StandardAdPageViewModel(Int32.Parse(e.Parameter.ToString()));
+                return;
             }
+
+            Int32 slotId;
+            DataContext = Int32.TryParse(e.Parameter?.ToString(), out slotId)
+                              ? new StandardAdPageViewModel(slotId)
+                              : new StandardAdPageViewModel();
         }
 
-        private async void OnSlotIdChangedImpl(Int32? newValue)
+        private void OnLoaded(Object sender, RoutedEventArgs e)
         {
-            if (!newValue.HasValue)
-            {
-                return;
-            }
+            Loaded -= OnLoaded;
 
-            var standardAd = new MyTargetControl(newValue.Value);
+            var flipViewScrollViewer = FlipView.GetAllChildren()
+                                               .OfType<ScrollViewer>()
+                                               .FirstOrDefault();
 
-            var adLoadingResult = await standardAd.LoadAsync();
+            var listBoxScrollViewer = ListBox.GetAllChildren()
+                                             .OfType<ScrollViewer>()
+                                             .FirstOrDefault();
 
-            if (!adLoadingResult.IsLoaded)
-            {
-                return;
-            }
+            var initialOffset = flipViewScrollViewer.HorizontalOffset;
 
-            standardAd.Start();
-
-            AdPlaceholder.Content = standardAd;
+            flipViewScrollViewer.ViewChanging += (o, args) =>
+                                                 {
+                                                     var currentOffset = flipViewScrollViewer.HorizontalOffset - initialOffset;
+                                                     var fullOffset = flipViewScrollViewer.ScrollableWidth - initialOffset;
+                                                     listBoxScrollViewer.ChangeView(currentOffset / fullOffset * listBoxScrollViewer.ScrollableWidth, null, null, false);
+                                                 };
         }
 
         private void OnUpdateTapped(Object sender, TappedRoutedEventArgs e)
         {
-            OnSlotIdChangedImpl((DataContext as StandardAdPageViewModel)?.SlotId);
+            (DataContext as StandardAdPageViewModel)?.UpdateSelectedItem();
         }
     }
 
     internal sealed class StandardAdTemplateSelector : DataTemplateSelector
     {
+        public DataTemplate LoremIpsumTemplate { get; set; }
         public DataTemplate NullTemplate { get; set; }
-
-        public DataTemplate ObjectTemplate { get; set; }
+        public DataTemplate StandardAdTemplate { get; set; }
 
         protected override DataTemplate SelectTemplateCore(Object item)
         {
-            return item == null ? NullTemplate : ObjectTemplate;
+            if (item is StandardAdItemViewModel)
+            {
+                return StandardAdTemplate;
+            }
+
+            if (item is LoremIpsumItemViewModel)
+            {
+                return LoremIpsumTemplate;
+            }
+
+            return NullTemplate;
         }
 
         protected override DataTemplate SelectTemplateCore(Object item, DependencyObject container)
         {
-            return item == null ? NullTemplate : ObjectTemplate;
+            return SelectTemplateCore(item);
         }
     }
 }

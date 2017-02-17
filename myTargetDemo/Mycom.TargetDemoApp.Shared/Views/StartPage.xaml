@@ -34,7 +34,7 @@
                   IsItemClickEnabled="True"
                   ItemClick="OnItemClick"
                   ItemTemplateSelector="{StaticResource ItemTemplateSelector}"
-                  ItemsSource="{Binding Pages,
+                  ItemsSource="{Binding Items,
                                         Mode=OneTime}"
                   Padding="9, 3"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -51,11 +51,11 @@
             </GridView.ItemsPanel>
             <GridView.ItemContainerStyle>
                 <Style TargetType="GridViewItem">
-                    <Setter Property="Margin" Value="0" />
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                     <Setter Property="HorizontalAlignment" Value="Stretch" />
-                    <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="Margin" Value="0" />
                     <Setter Property="VerticalAlignment" Value="Stretch" />
+                    <Setter Property="VerticalContentAlignment" Value="Stretch" />
                 </Style>
             </GridView.ItemContainerStyle>
         </GridView>

@@ -4,8 +4,8 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
-using Mycom.TargetDemoApp.ViewModels;
 using Mycom.TargetDemoApp.Extensions;
+using Mycom.TargetDemoApp.ViewModels;
 
 namespace Mycom.TargetDemoApp.Views
 {
@@ -41,12 +41,12 @@ namespace Mycom.TargetDemoApp.Views
 
             var initialOffset = flipViewScrollViewer.HorizontalOffset;
 
-            flipViewScrollViewer.ViewChanging+= (o, args) =>
-            {
-                var currentOffset = flipViewScrollViewer.HorizontalOffset - initialOffset;
-                var fullOffset = flipViewScrollViewer.ScrollableWidth - initialOffset;
-                listBoxScrollViewer.ChangeView(currentOffset / fullOffset * listBoxScrollViewer.ScrollableWidth, null, null, false);
-            };
+            flipViewScrollViewer.ViewChanging += (o, args) =>
+                                                 {
+                                                     var currentOffset = flipViewScrollViewer.HorizontalOffset - initialOffset;
+                                                     var fullOffset = flipViewScrollViewer.ScrollableWidth - initialOffset;
+                                                     listBoxScrollViewer.ChangeView(currentOffset / fullOffset * listBoxScrollViewer.ScrollableWidth, null, null, false);
+                                                 };
         }
 
         private void OnUpdateTapped(Object sender, TappedRoutedEventArgs e)

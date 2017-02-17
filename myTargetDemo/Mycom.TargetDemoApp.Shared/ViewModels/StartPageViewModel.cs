@@ -24,15 +24,13 @@ namespace Mycom.TargetDemoApp.ViewModels
         private const String Title = "myTarget Demo";
 
         private static readonly IReadOnlyDictionary<String, ICustomProperty> CustomProperties =
-            CustomPropertyFactory.CreateDictionary(CustomPropertyFactory.Create(nameof(Pages),
-                                                                                o => o.Pages,
-                                                                                (o, i) => o.Pages[(Int32) i]),
+            CustomPropertyFactory.CreateDictionary(CustomPropertyFactory.Create(nameof(Items), o => o.Items),
                                                    CustomPropertyFactory.Create(nameof(Title), o => Title));
 
 
         private readonly Frame _frame;
         private readonly IPropertySet _localSettings = ApplicationData.Current.LocalSettings.Values;
-        private readonly ObservableCollection<Object> Pages;
+        private readonly ObservableCollection<Object> Items;
 
         internal StartPageViewModel(Frame frame)
         {
@@ -42,8 +40,8 @@ namespace Mycom.TargetDemoApp.ViewModels
                         {
                             new DefaultItemViewModel(AdvertisementType.Standard,
                                                      Brushes.BrushFF3F51B5,
-                                                     "Banners 320x50",
-                                                     "Standard 320x50 banners",
+                                                     "Banners",
+                                                     "320x50 and 300x250 banners",
                                                      new BitmapImage(new Uri("ms-appx:///Resources/StandardAd.png"))),
                             new DefaultItemViewModel(AdvertisementType.Interstitial,
                                                      Brushes.BrushFF009688,
@@ -62,7 +60,7 @@ namespace Mycom.TargetDemoApp.ViewModels
                                                      new BitmapImage(new Uri("ms-appx:///Resources/Plus.png")))
                         };
 
-            Pages = items;
+            Items = items;
 
             foreach (var pair in _localSettings)
             {
@@ -141,9 +139,9 @@ namespace Mycom.TargetDemoApp.ViewModels
                         break;
                 }
             }
-            else if (clickedItem is InterstitialCustomItemViewModel)
+            else
             {
-                ((InterstitialCustomItemViewModel) clickedItem).Show();
+                (clickedItem as InterstitialCustomItemViewModel)?.Show();
             }
         }
 
@@ -164,13 +162,13 @@ namespace Mycom.TargetDemoApp.ViewModels
                     return;
             }
 
-            Pages.Insert(Pages.Count - 1, removeNotify);
+            Items.Insert(Items.Count - 1, removeNotify);
             removeNotify.RemoveRequest += OnRemoveRequest;
         }
 
         private void OnRemoveRequest(IRemoveNotify removeNotify)
         {
-            Pages.Remove(removeNotify);
+            Items.Remove(removeNotify);
 
             _localSettings.Remove(removeNotify.GetSlotId().ToString());
         }
