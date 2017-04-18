@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
-using Mycom.Target;
+using Mycom.Target.Core.Facades;
 using Mycom.TargetDemoApp.Views;
 
 namespace Mycom.TargetDemoApp
@@ -33,7 +33,7 @@ namespace Mycom.TargetDemoApp
 
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            Tracer.IsEnabled = true;
+            AbstractAd.IsDebugMode = true;
 
             if (Window.Current.Content == null)
             {
@@ -41,7 +41,7 @@ namespace Mycom.TargetDemoApp
                                {
                                    ContentTransitions = new TransitionCollection
                                                         {
-                                                            new EdgeUIThemeTransition { Edge = EdgeTransitionLocation.Bottom },
+                                                            new EdgeUIThemeTransition { Edge = EdgeTransitionLocation.Bottom }
                                                         },
                                    CacheSize = 2
                                };

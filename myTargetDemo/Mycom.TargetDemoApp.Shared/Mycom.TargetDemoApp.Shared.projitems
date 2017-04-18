@@ -97,5 +97,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Resources\NativeAd.png" />
     <Content Include="$(MSBuildThisFileDirectory)Resources\Plus.png" />
     <Content Include="$(MSBuildThisFileDirectory)Resources\StandardAd.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Resources\StandardAd300x250.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Resources\StandardAd320x50.png" />
   </ItemGroup>
 </Project>
